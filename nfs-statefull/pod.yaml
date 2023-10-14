@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pod-nfs
+  name: nfs
   labels:
-    run: pod-nfs
+    run: nfs
 spec:
   volumes:
     - name: pvc-db
@@ -17,3 +17,5 @@ spec:
           mountPath: "/mnt"
       command: ["/bin/sh"]
       args: ["-c","while true; do cat /proc/meminfo | grep MemFree >> /mnt/memory.txt; sleep 5; done"]
+  imagePullSecrets:
+    - name: regcred    

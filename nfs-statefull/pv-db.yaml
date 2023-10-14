@@ -10,5 +10,5 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: nfs
-    path: /nfs/share-2
+    path: /nfs/share-1
 
