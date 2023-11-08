@@ -4,7 +4,7 @@ metadata:
   name: sampleweb
 spec:
   selector:
-    tier: frontend
+    name: nginx-pod
   type: NodePort
   ports:
     - port: 82
