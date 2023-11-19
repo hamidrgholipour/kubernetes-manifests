@@ -1,0 +1,19 @@
+for i in {11..100}; do ./insert-query.sh  "test$i"; done &>/dev/null
+
+
+kubectl run mysql-client --image=mysql:5.7 -i --rm --restart=Never --\
+  mysql -h mysql-0.mysql <<EOF
+CREATE DATABASE users;
+CREATE TABLE users.data (
+    id INT NOT NULL AUTO_INCREMENT,
+    user VARCHAR(255),
+    lastname VARCHAR(255),
+    PRIMARY KEY (id)
+);
+INSERT INTO users.data (id, user, lastname) VALUES (1, 'hamid', 'hamid');
+EOF
+
+
+kubectl run mysql-client --image=mysql:5.7 -i -t --rm --restart=Never --\
+  mysql -h mysql-read -e "SELECT * FROM user.data"
+
