@@ -1,0 +1,6 @@
+kubectl rollout undo deploy my-app
+kubectl rollout pause deploy my-app
+kubectl rollout resume deploy my-app
+
+# Wait for all the version 2 pods to be running
+kubectl rollout status deploy my-app-v2 -w
