@@ -1,0 +1,2 @@
+#check namespace and servce account
+k auth can-i --as system:serviceaccount:default:hamid get pod

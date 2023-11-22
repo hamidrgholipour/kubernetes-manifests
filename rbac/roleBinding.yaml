@@ -1,0 +1,14 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: hamid-roleBinding
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: hamid
+  namespace: default
+roleRef:
+  kind: Role
+  name: hamid
+  apiGroup: rbac.authorization.k8s.io
+

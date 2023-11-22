@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: hamidClusterRoleBinding
+subjects:
+- kind: ServiceAccount
+  name: hamid
+  namespace: default
+roleRef:
+  kind: ClusterRole
+  name: hamid
+  apiGroup: rbac.authorization.k8s.io
+
