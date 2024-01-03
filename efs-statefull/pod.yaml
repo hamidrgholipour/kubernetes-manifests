@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nfs
+  labels:
+    run: nfs
+spec:
+  volumes:
+    - name: pvc-db
+      persistentVolumeClaim:
+        claimName: pvc-db
+  containers:
+    - name: app
+      image: alpine
+      volumeMounts:
+        - name: pvc-db
+          mountPath: "/mnt"
+      command: ["/bin/sh"]
+      args: ["-c","while true; do cat /proc/meminfo | grep MemFree >> /mnt/memory.txt; sleep 5; done"]
+  imagePullSecrets:
+    - name: regcred    
