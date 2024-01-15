@@ -16,6 +16,7 @@ spec:
         - name: pvc-nfs
           mountPath: "/mnt"
       command: ["/bin/sh"]
-      args: ["-c","while true; do cat /proc/meminfo | grep MemFree >> /mnt/memory.txt; sleep 5; done"]
-  imagePullSecrets:
+      # args: ["-c","while true; do cat /proc/meminfo | grep MemFree >> /mnt/memory.txt; sleep 5; done"]
+      args: ["-c","while true; do  date +%H:%M:%S >> /mnt/memory.txt; sleep 1; done"]  
+  imagePullSecrets: 
     - name: regcred    
