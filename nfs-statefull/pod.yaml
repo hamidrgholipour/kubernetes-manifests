@@ -6,14 +6,14 @@ metadata:
     run: nfs
 spec:
   volumes:
-    - name: pvc-db
+    - name: pvc-nfs
       persistentVolumeClaim:
-        claimName: pvc-db
+        claimName: pvc-nfs
   containers:
     - name: app
       image: alpine
       volumeMounts:
-        - name: pvc-db
+        - name: pvc-nfs
           mountPath: "/mnt"
       command: ["/bin/sh"]
       args: ["-c","while true; do cat /proc/meminfo | grep MemFree >> /mnt/memory.txt; sleep 5; done"]
