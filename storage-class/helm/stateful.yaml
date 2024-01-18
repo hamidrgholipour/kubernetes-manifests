@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: alpine
+  annotations:
+    kubernetes.io/change-cause: ver1
+spec:
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: alpine
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: alpine
+        svc: example
+    spec:
+      volumes:
+        - name: pvc-nfs
+          persistentVolumeClaim:
+            claimName: pvc-nfs
+      containers:
+        - name: app
+          image: repo.local/alpine
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: pvc-nfs
+              mountPath: "/mnt"
+          env:
+          - name: TZ
+            value: "Asia/Tehran"    
+          command: ["/bin/sh"]
+          # args: ["-c","while true; do cat /proc/meminfo | grep MemFree >> /mnt/memory.txt; sleep 5; done"]
+          #date +%H:%M:%S
+          args: ["-c","while true; do hostname >> /mnt/time.txt; sleep 5; done"]
+      # nodeSelector:
+      #   key: master     
