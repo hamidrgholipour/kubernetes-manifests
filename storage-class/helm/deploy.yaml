@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: alpine
   annotations:
@@ -23,7 +23,7 @@ spec:
       containers:
         - name: app
           image: repo.local/alpine:v1
-          imagePullPolicy: IfNotPresent
+          # imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: pvc-nfs
               mountPath: "/mnt"
