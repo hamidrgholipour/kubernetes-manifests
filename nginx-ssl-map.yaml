@@ -1,0 +1,32 @@
+apiVersion:  apps/v1
+kind: Deployment 
+metadata:
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        volumeMounts:
+          - mountPath: "/etc/nginx/ssl"
+            name: nginx-ssl
+            readOnly: true
+        ports:
+        - containerPort: 80
+      volumes:
+        - name: nginx-ssl
+          secret:
+            secretName: nginx-ssl
+      restartPolicy: Always
