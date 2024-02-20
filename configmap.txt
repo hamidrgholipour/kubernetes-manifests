@@ -1,0 +1,5 @@
+## from file
+kubectl create configmap hamid-1 --from-file=config-file.conf
+
+## from value
+kubectl create configmap test-1 --from-literal=sleep-interval=25  
