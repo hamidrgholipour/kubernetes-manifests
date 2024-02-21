@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: nginx-deployment
-          image: nginx
+          image: repo.local/nginx
           ports:
             - containerPort: 80
           resources:
@@ -28,3 +28,5 @@ spec:
             limits:
               memory: 20Mi
               cpu: 20m
+      imagePullSecrets:
+          - name: repo.local        

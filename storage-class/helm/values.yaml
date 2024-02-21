@@ -8,7 +8,7 @@ image:
 imagePullSecrets: []
 
 nfs:
-  server: nfs
+  server: 192.168.10.201
   path: /nfs
   mountOptions:
   volumeName: nfs-subdir
