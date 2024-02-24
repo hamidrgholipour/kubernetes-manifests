@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busybox-deployment
+  annotations:
+    kubernetes.io/change-cause: ver1
+spec:
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: busybox-deployment
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: busybox-deployment
+        svc: example
+    spec:
+      containers:
+        - name: busybox-deployment
+          image: repo.local/busybox
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+            limits:
+              memory: 20Mi
+              cpu: 20m
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                - sh
+                - -c
+                - "sleep 5"
+      imagePullSecrets:
+          - name: repo.local     
