@@ -5,7 +5,7 @@ metadata:
   # namespace: storage
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: nfs-client   
   resources:
     requests:
