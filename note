@@ -1,3 +1,8 @@
 get a pod that labeled as app=alpine
 kubectl exec $(kubectl get pod -l app=alpine -o jsonpath="{.items[0].metadata.name}") -it -c alpine -- sh
 check helm and helm version:  helm search repo ingress-nginx --versions
+create template: helm template ingress-nginx ingress-nginx \
+                  --repo https://kubernetes.github.io/ingress-nginx \
+                  --version ${CHART_VERSION} \
+                  --namespace ingress-nginx \
+                  > ./kubernetes/ingress/controller/nginx/manifests/nginx-ingress.${APP_VERSION}.yaml
