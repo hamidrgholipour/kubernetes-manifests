@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx
+  name: nginx
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - image: nginx:alpine
+        imagePullPolicy: Always
+        name: nginx
+      restartPolicy: Always
+      tolerations:
+      - key: "key2"
+        operator: "Equal"
+        value: "value2"
+        effect: "NoSchedule"
